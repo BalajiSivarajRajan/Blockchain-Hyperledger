@@ -1,0 +1,92 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: '2'
+
+services:
+
+  orderer.tradent.com:
+    container_name: orderer.tradent.com
+    image: hyperledger/fabric-orderer:${TAG}
+    environment:
+      - ORDERER_GENERAL_LOGLEVEL=debug
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      - ORDERER_GENERAL_GENESISMETHOD=file
+      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
+      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+      # enabled TLS
+      - ORDERER_GENERAL_TLS_ENABLED=true
+      - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+    command: orderer
+    volumes:
+    - ../channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+    - ../crypto-config/ordererOrganizations/tradent.com/orderers/orderer.tradent.com/msp:/var/hyperledger/orderer/msp
+    - ../crypto-config/ordererOrganizations/tradent.com/orderers/orderer.tradent.com/tls/:/var/hyperledger/orderer/tls
+    ports:
+      - 7050:7050
+
+  peer0.@ORG_0.tradent.com:
+    container_name: peer0.@ORG_0.tradent.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.@ORG_0.tradent.com
+      - CORE_PEER_ADDRESS=peer0.@ORG_0.tradent.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.@ORG_0.tradent.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.@ORG_0.tradent.com:7051
+      #- CORE_PEER_CHAINCODELISTENADDRESS=peer0.@ORG_0.tradent.com:7052
+      - CORE_PEER_LOCALMSPID=@ORG_0MSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/@ORG_0.tradent.com/peers/peer0.@ORG_0.tradent.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/@ORG_0.tradent.com/peers/peer0.@ORG_0.tradent.com/tls:/etc/hyperledger/fabric/tls
+    ports:
+      - 7051:7051
+      - 7053:7053
+
+  peer0.@ORG_1.tradent.com:
+    container_name: peer0.@ORG_1.tradent.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.@ORG_1.tradent.com
+      - CORE_PEER_ADDRESS=peer0.@ORG_1.tradent.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.@ORG_1.tradent.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.@ORG_1.tradent.com:7051
+      #- CORE_PEER_CHAINCODELISTENADDRESS=peer0.@ORG_1.tradent.com:7052      
+      - CORE_PEER_LOCALMSPID=@ORG_1MSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/@ORG_1.tradent.com/peers/peer0.@ORG_1.tradent.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/@ORG_1.tradent.com/peers/peer0.@ORG_1.tradent.com/tls:/etc/hyperledger/fabric/tls
+    ports:
+      - 8051:7051
+      - 8053:7053
+
+  peer0.@ORG_2.tradent.com:
+    container_name: peer0.@ORG_2.tradent.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.@ORG_2.tradent.com
+      - CORE_PEER_ADDRESS=peer0.@ORG_2.tradent.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.@ORG_2.tradent.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.@ORG_2.tradent.com:7051
+      #- CORE_PEER_CHAINCODELISTENADDRESS=peer0.@ORG_2.tradent.com:7052      
+      - CORE_PEER_LOCALMSPID=@ORG_2MSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/@ORG_2.tradent.com/peers/peer0.@ORG_2.tradent.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/@ORG_2.tradent.com/peers/peer0.@ORG_2.tradent.com/tls:/etc/hyperledger/fabric/tls
+    ports:
+      - 9051:7051
+      - 9053:7053

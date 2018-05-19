@@ -1,0 +1,33 @@
+{
+    "name": "@ORG_0-@CHANNEL_NAME_0",
+    "type": "hlfv1",
+    "mspID": "@ORG_0MSP",
+    "peers": [
+        {
+            "requestURL": "grpcs://localhost:@requestPORT_0",
+            "eventURL": "grpcs://localhost:@eventPORT_0",
+            "cert": "./crypto-config/peerOrganizations/@ORG_0.tradent.com/peers/peer0.@ORG_0.tradent.com/tls/ca.crt",
+            "hostnameOverride": "peer0.@ORG_0.tradent.com"
+        },
+        {
+            "requestURL": "grpcs://localhost:@requestPORT_1",
+            "cert": "./crypto-config/peerOrganizations/@ORG_1.tradent.com/peers/peer0.@ORG_1.tradent.com/tls/ca.crt",
+            "hostnameOverride": "peer0.@ORG_1.tradent.com"
+        }
+    ],
+    "ca": {
+        "url": "https://localhost:@caPORT_0",
+        "name": "ca-@ORG_0",
+        "cert": "./crypto-config/peerOrganizations/@ORG_0.tradent.com/peers/peer0.@ORG_0.tradent.com/tls/ca.crt",
+        "hostnameOverride": "ca-@ORG_0"
+    },
+    "orderers": [
+        {
+            "url" : "grpcs://localhost:7050",
+            "cert": "./crypto-config/ordererOrganizations/tradent.com/orderers/orderer.tradent.com/tls/ca.crt",
+            "hostnameOverride": "orderer.tradent.com"
+        }
+    ],
+    "channel": "@CHANNEL_NAME_0",
+    "timeout": 300
+}

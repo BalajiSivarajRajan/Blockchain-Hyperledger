@@ -1,0 +1,28 @@
+{
+    "name": "@ORG-only",
+    "type": "hlfv1",
+    "mspID": "@ORGMSP",
+    "peers": [
+        {
+            "requestURL": "grpcs://localhost:@requestPORT",
+            "eventURL": "grpcs://localhost:@eventPORT",
+            "cert": "./crypto-config/peerOrganizations/@ORG.tradent.com/peers/peer0.@ORG.tradent.com/tls/ca.crt",
+            "hostnameOverride": "peer0.@ORG.tradent.com"
+        }
+    ],
+    "ca": {
+        "url": "https://localhost:@caPORT",
+        "name": "ca-@ORG",
+        "cert": "./crypto-config/peerOrganizations/@ORG.tradent.com/peers/peer0.@ORG.tradent.com/tls/ca.crt",
+        "hostnameOverride": "ca-@ORG"
+    },
+    "orderers": [
+        {
+            "url" : "grpcs://localhost:7050",
+            "cert": "./crypto-config/ordererOrganizations/tradent.com/orderers/orderer.tradent.com/tls/ca.crt",
+            "hostnameOverride": "orderer.tradent.com"
+        }
+    ],
+    "channel": "@CHANNEL_NAME",
+    "timeout": 300
+}
