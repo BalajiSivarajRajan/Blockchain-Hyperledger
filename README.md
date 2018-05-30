@@ -10,7 +10,7 @@
   It a set of records that are shared, replicated and synchronized among the participants in a network. It records the all the transactions like exchange of data or assets among the participants in the network. 
 
 ## Problem statement: 
-  There are different participants in a business and every participants keeps their own ledger copy. Transactions are bilateral and each participants has to interact with each other and thus my creating a complex network. Transaction are governed by a central body and which needs multiple approvals. This is a time & money consuming task. 
+  There are different participants in a business and every participants keeps their own ledger copy. Transactions are bilateral and each participants has to interact with each other and thus by creating a complex network. Transaction are governed by a central body and which needs multiple approvals. This is a time & money consuming task. 
 
 ### Trust: 
   Establishing trust in a network is very difficult and it’s a time consuming with subjective of reputation. Reputed and governing body take time to create trust. 
@@ -83,4 +83,4 @@ Accountability:  Regulators like bank, clearinghouse, stock exchange, legal serv
   Committing peers validate the transaction against the endorsement policy and also check whether they are valid for the current state. After all these process, the transactions are written into the ledger. Client applications are notified when the transactions are succeed or failed and also when the blocks are added into the ledger, if the client applications are registered for the notification. Client application will be notified by each peer to which they are connected to. 
 
 ## Conclusion
-  I have given an overview of what Blockchain is and high level view of Hyperledger fabric.
+  I have given an overview of what Blockchain is and high level view of Hyperledger fabric. This approach can be used across various business areas like finance, supply chain, trade, etcs.
