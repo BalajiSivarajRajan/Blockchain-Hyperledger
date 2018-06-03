@@ -2,7 +2,7 @@
   There is no single definition for Blockchain. According to me Blockchain is – it’s a immutable distributed ledger that records the transactions in a decentralized environment.  It’s an ordered list of all the transactions since inception. There are different type of Blockchain, public & permission. In this writeup I will talk about the permission Blockchain – Hyperledger Fabric. 
 
 
-![alt text](https://github.com/BalajiSivarajRajan/Blockchain-Hyperledger/blob/master/commodity-exchange/current-state.png)
+![alt text](https://github.com/BalajiSivarajRajan/Blockchain-Hyperledger/blob/master/commodity-exchange/images/current-state.png)
 
 ### <p align="center"> Current state of transactions
   
@@ -25,7 +25,7 @@ Accountability:  Regulators like bank, clearinghouse, stock exchange, legal serv
 ## How Blockchain works?
   In a distributed peer-to-peer network transactions are stored in blocks which are linked together to form chain and this is called as Blockchain. Each block contains hash of the current block, timestamp of recent valid transaction and hash for the previous block. Previous block hash is used to link the block and prevents from altering the block or inserting between blocks. 
   
-![alt text](https://github.com/BalajiSivarajRajan/Blockchain-Hyperledger/blob/master/commodity-exchange/Blockchain-state.png)
+![alt text](https://github.com/BalajiSivarajRajan/Blockchain-Hyperledger/blob/master/commodity-exchange/images/Blockchain-state.png)
 
 ### <p align="center"> Blockchain state of transactions
 
@@ -73,12 +73,12 @@ Accountability:  Regulators like bank, clearinghouse, stock exchange, legal serv
 
 ## Architecture of Hyperledger Fabric v1
 
-![alt text](https://github.com/BalajiSivarajRajan/Blockchain-Hyperledger/blob/master/commodity-exchange/Hyperledger-architecture-v1.png)
+![alt text](https://github.com/BalajiSivarajRajan/Blockchain-Hyperledger/blob/master/commodity-exchange/images/Hyperledger-architecture-v1.png)
 
 ## How it works? 
   Client application / SDK submits a transaction proposal for a chaincode by targeting the required peers. All the Endorser will execute  the transaction. These transactions will not be updated in the ledger as its only to endorse. Once endorsement is completed, its signed by the endorser and returned to the client. The client then submit the transaction to the Orderer. Its then the Ordering service collects the transaction in blocks and distributes to the committing peers. These committing peers then delivers to other peers using gossip. There are different ordering algorithms are available and they are SOLO (single node, development), Kafka, SBFT. 
  
-![alt text](https://github.com/BalajiSivarajRajan/Blockchain-Hyperledger/blob/master/commodity-exchange/fabric-transaction-processing.png)
+![alt text](https://github.com/BalajiSivarajRajan/Blockchain-Hyperledger/blob/master/commodity-exchange/images/fabric-transaction-processing.png)
 
   Committing peers validate the transaction against the endorsement policy and also check whether they are valid for the current state. After all these process, the transactions are written into the ledger. Client applications are notified when the transactions are succeed or failed and also when the blocks are added into the ledger, if the client applications are registered for the notification. Client application will be notified by each peer to which they are connected to. 
 
